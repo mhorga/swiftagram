@@ -42,14 +42,16 @@ class DataSource: NSObject {
     }
     
     func populateDataWithParameters(parameters: NSDictionary?, completionHandler: NewItemCompletionBlock?) {
-        if let parameters = parameters {
+//        if let parameters = parameters {
             if accessToken != nil {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                    var urlString = "https://api.instagram.com/v1/users/self/feed?access_token=\(self.accessToken)"
-                    for (parameterName, value) in parameters {
-                        let paramName = parameterName as String
-                        let params = value as String
-                        urlString += "&\(paramName)=\(params)"
+                    var urlString = "https://api.instagram.com/v1/users/self/feed?access_token=\(self.accessToken!)"
+                    if let parameters = parameters {
+                        for (parameterName, value) in parameters {
+                            let paramName = parameterName as String
+                            let params = value as String
+                            urlString += "&\(paramName)=\(params)"
+                        }
                     }
                     let url = NSURL(string: urlString)
                     if url != nil {
@@ -57,36 +59,66 @@ class DataSource: NSObject {
                         let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?>=nil
                         let webError = NSErrorPointer()
                         let responseData: NSData =  NSURLConnection.sendSynchronousRequest(request, returningResponse: response, error: webError)!
-                        if responseData != NSNull() {
+//                        if responseData != NSNull() {
                             let jsonError = NSErrorPointer()
                             let feedDictionary = NSJSONSerialization.JSONObjectWithData(responseData, options: nil, error: jsonError) as NSDictionary
-                            if feedDictionary != NSNull() {
+//                            if feedDictionary != NSNull() {
                                 dispatch_async(dispatch_get_main_queue(), {
                                     self.parseDataFromFeedDictionary(feedDictionary, parameters: parameters)
                                     if completionHandler != nil {
                                         completionHandler!(nil)
                                     }
                                 })
-                            } else if (completionHandler != nil) {
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    completionHandler!(jsonError)
-                                })
-                            }
-                        } else if (completionHandler != nil) {
-                            dispatch_async(dispatch_get_main_queue(), {
-                                completionHandler!(webError)
-                            })
-                        }
+//                            } else if (completionHandler != nil) {
+//                                dispatch_async(dispatch_get_main_queue(), {
+//                                    completionHandler!(jsonError)
+//                                })
+//                            }
+//                        } else if (completionHandler != nil) {
+//                            dispatch_async(dispatch_get_main_queue(), {
+//                                completionHandler!(webError)
+//                            })
+//                        }
                     }
                 })
             }
-        }
+//        }
     }
-    
-    func parseDataFromFeedDictionary(feedDictionary: NSDictionary, parameters: NSDictionary) {
-        let mediaArray = feedDictionary["data"] as NSDictionary
+/*
+    - (void) parseDataFromFeedDictionary:(NSDictionary *) feedDictionary fromRequestWithParameters:(NSDictionary *)parameters {
+        NSArray *mediaArray = feedDictionary[@"data"];
+        NSMutableArray *tmpMediaItems = [NSMutableArray array];
+        for (NSDictionary *mediaDictionary in mediaArray) {
+            BLCMedia *mediaItem = [[BLCMedia alloc] initWithDictionary:mediaDictionary];
+            if (mediaItem) {
+                [tmpMediaItems addObject:mediaItem];
+                [self downloadImageForMediaItem:mediaItem];
+            }
+        }
+        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
+        if (parameters[@"min_id"]) {
+            // This was a pull-to-refresh request
+            NSRange rangeOfIndexes = NSMakeRange(0, tmpMediaItems.count);
+            NSIndexSet *indexSetOfNewObjects = [NSIndexSet indexSetWithIndexesInRange:rangeOfIndexes];
+            [mutableArrayWithKVO insertObjects:tmpMediaItems atIndexes:indexSetOfNewObjects];
+        } else if (parameters[@"max_id"]) {
+            // This was an infinite scroll request
+            if (tmpMediaItems.count == 0) {
+                // disable infinite scroll, since there are no more older messages
+                self.thereAreNoMoreOlderMessages = YES;
+            }
+            [mutableArrayWithKVO addObjectsFromArray:tmpMediaItems];
+        } else {
+            [self willChangeValueForKey:@"mediaItems"];
+            self.mediaItems = tmpMediaItems;
+            [self didChangeValueForKey:@"mediaItems"];
+        }
+    } 
+*/    
+    func parseDataFromFeedDictionary(feedDictionary: Dictionary<NSObject, AnyObject>, parameters: NSDictionary?) {
+        let mediaArray: AnyObject? = feedDictionary["data"]
         var tmpMediaItems = [Media]()
-        for (index, mediaDictionary) in mediaArray as NSDictionary {
+        for (index, mediaDictionary) in mediaArray as Dictionary<NSObject, AnyObject> {
             let mediaItem = Media(mediaDictionary: mediaDictionary as NSDictionary)
             if (mediaItem != NSNull()) {
                 tmpMediaItems.append(mediaItem)
@@ -94,11 +126,11 @@ class DataSource: NSObject {
             }
         }
         var mutableArrayWithKVO = mutableArrayValueForKey("mediaItems")
-        if parameters["min_id"] != nil {
+        if parameters != nil && parameters!["min_id"] != nil {
             let rangeOfIndexes = NSMakeRange(0, tmpMediaItems.count)
             let indexSetOfNewObjects = NSIndexSet(indexesInRange: rangeOfIndexes)
             mutableArrayWithKVO.insertObjects(tmpMediaItems, atIndexes:indexSetOfNewObjects)
-        } else if parameters["max_id"] != nil {
+        } else if parameters != nil && parameters!["max_id"] != nil {
             if (tmpMediaItems.count == 0) {
                 self.thereAreNoMoreOlderMessages = true
             }
@@ -108,6 +140,26 @@ class DataSource: NSObject {
             mediaItems = tmpMediaItems
             didChangeValueForKey("mediaItems")
         }
+        if (tmpMediaItems.count > 0) {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+                let numberOfItemsToSave = min(self.mediaItems.count, 50)
+                let mediaItemsToSave = self.mediaItems[0 ..< numberOfItemsToSave]
+                //let fullPath = pathForFilename(NSStringFromSelector(mediaItems))
+                //let mediaItemData = NSKeyedArchiver.archivedDataWithRootObject(mediaItemsToSave)
+                var dataError: NSError
+                //let wroteSuccessfully = mediaItemData.writeToFile(fullPath, options: .DataWritingAtomic | .DataWritingFileProtectionCompleteUnlessOpen, error: &dataError)
+                //if (!wroteSuccessfully) {
+                    //println("Couldn't write file: \(dataError)")
+                //}
+            }
+        }
+    }
+    
+    func pathForFilename(filename: NSString) -> NSString {
+        let paths = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)
+        let documentsDirectory: AnyObject? = paths.first
+        let dataPath = documentsDirectory!.stringByAppendingPathComponent(filename)
+        return dataPath
     }
     
     func downloadImageForMediaItem(mediaItem: Media) {

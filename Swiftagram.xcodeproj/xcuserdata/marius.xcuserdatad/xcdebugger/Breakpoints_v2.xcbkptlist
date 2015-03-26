@@ -2,4 +2,146 @@
 <Bucket
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swiftagram/DataSource.swift"
+            timestampString = "448902164.010932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
+            landmarkName = "parseDataFromFeedDictionary(_:parameters:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swiftagram/DataSource.swift"
+            timestampString = "448902164.010932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "parseDataFromFeedDictionary(_:parameters:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swiftagram/DataSource.swift"
+            timestampString = "448960142.106729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "165"
+            endingLineNumber = "165"
+            landmarkName = "requestNewItemsWithCompletionHandler(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swiftagram.DataSource.requestNewItemsWithCompletionHandler (Swiftagram.DataSource)(Swift.Optional&lt;(Swift.Optional&lt;Swift.AutoreleasingUnsafeMutablePointer&lt;Swift.Optional&lt;ObjectiveC.NSError&gt;&gt;&gt;) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "Swiftagram"
+                  urlString = "file:///Users/marius/Stuff/Xcode/Swiftagram/Swiftagram/DataSource.swift"
+                  timestampString = "448926831.756418"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "163"
+                  endingLineNumber = "163"
+                  offsetFromSymbolStart = "1985">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swiftagram.DataSource.(requestNewItemsWithCompletionHandler (Swiftagram.DataSource) -&gt; (Swift.Optional&lt;(Swift.Optional&lt;Swift.AutoreleasingUnsafeMutablePointer&lt;Swift.Optional&lt;ObjectiveC.NSError&gt;&gt;&gt;) -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Swiftagram"
+                  urlString = "file:///Users/marius/Stuff/Xcode/Swiftagram/Swiftagram/DataSource.swift"
+                  timestampString = "448926831.756681"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "55">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swiftagram/DataSource.swift"
+            timestampString = "448960142.106729"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "183"
+            endingLineNumber = "183"
+            landmarkName = "requestOldItemsWithCompletionHandler(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swiftagram.DataSource.requestOldItemsWithCompletionHandler (Swiftagram.DataSource)(Swift.Optional&lt;(Swift.Optional&lt;Swift.AutoreleasingUnsafeMutablePointer&lt;Swift.Optional&lt;ObjectiveC.NSError&gt;&gt;&gt;) -&gt; ()&gt;) -&gt; ()"
+                  moduleName = "Swiftagram"
+                  urlString = "file:///Users/marius/Stuff/Xcode/Swiftagram/Swiftagram/DataSource.swift"
+                  timestampString = "448926831.849279"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "2981">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Swiftagram.DataSource.(requestOldItemsWithCompletionHandler (Swiftagram.DataSource) -&gt; (Swift.Optional&lt;(Swift.Optional&lt;Swift.AutoreleasingUnsafeMutablePointer&lt;Swift.Optional&lt;ObjectiveC.NSError&gt;&gt;&gt;) -&gt; ()&gt;) -&gt; ()).(closure #1)"
+                  moduleName = "Swiftagram"
+                  urlString = "file:///Users/marius/Stuff/Xcode/Swiftagram/Swiftagram/DataSource.swift"
+                  timestampString = "448926831.849546"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "182"
+                  endingLineNumber = "182"
+                  offsetFromSymbolStart = "55">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Swiftagram/DataSource.swift"
+            timestampString = "448997399.092934"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "parseDataFromFeedDictionary(_:parameters:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

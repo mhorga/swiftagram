@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let loginVC = LoginViewController()
         navVC.setViewControllers([loginVC], animated: true)
         NSNotificationCenter.defaultCenter().addObserverForName(LoginViewController().LoginViewControllerDidGetAccessTokenNotification, object: nil, queue: nil, usingBlock: { (note: NSNotification?) in
-            let imagesVC = ImagesTableViewController()
+            let imagesVC = ImagesTableViewController(style: .Plain)
             navVC.setViewControllers([imagesVC], animated: true)
         })
         window?.rootViewController = navVC

@@ -27,7 +27,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let urlString = "https://instagram.com/oauth/authorize/?client_id=\(DataSource.instagramClientID)&redirect_uri=\(redirectURI)&response_type=token"
+        let urlString = ""
         let url = NSURL(string: urlString)
         if url != nil {
             let request = NSMutableURLRequest(URL: url!)
