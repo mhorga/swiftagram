@@ -43,8 +43,8 @@ class MediaTableViewCell: UITableViewCell {
         let maxSize = CGSizeMake(CGRectGetWidth(self.bounds), CGFloat.max)
         let usernameLabelSize = usernameAndCaptionLabel!.sizeThatFits(maxSize)
         let commentLabelSize = commentLabel!.sizeThatFits(maxSize)
-        usernameAndCaptionLabelHeightConstraint!.constant = usernameLabelSize.height + 20
-        commentLabelHeightConstraint!.constant = commentLabelSize.height + 20
+        //usernameAndCaptionLabelHeightConstraint!.constant = usernameLabelSize.height + 20
+        //commentLabelHeightConstraint!.constant = commentLabelSize.height + 20
         separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds))
     }
     
@@ -68,30 +68,32 @@ class MediaTableViewCell: UITableViewCell {
         super.setHighlighted(highlighted, animated: animated)
     }
     
-    func initWithStyle(style: UITableViewCellStyle, reuseIdentifier: NSString) {
-//        super.init(style, reuseIdentifier)
-//        if (self) {
-            mediaImageView = UIImageView()
-            usernameAndCaptionLabel = UILabel()
-            commentLabel = UILabel()
-            commentLabel!.numberOfLines = 0
-            contentView.addSubview(mediaImageView!)
-            mediaImageView!.setTranslatesAutoresizingMaskIntoConstraints(false)
-            contentView.addSubview(usernameAndCaptionLabel!)
-            usernameAndCaptionLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
-            contentView.addSubview(commentLabel!)
-            commentLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
-//            let viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel)
-//            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]]
-//            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]]
-//            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]]
-//            [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]" options:kNilOptions metrics:nil views:viewDictionary]]
-//            self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView attribute:NSLayoutAttributeHeight
-//            relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-//            self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-//            self.commentLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_commentLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-//            [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]]
-//        }
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        mediaImageView = UIImageView()
+        usernameAndCaptionLabel = UILabel()
+        commentLabel = UILabel()
+        commentLabel!.numberOfLines = 0
+        contentView.addSubview(mediaImageView!)
+        mediaImageView!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentView.addSubview(usernameAndCaptionLabel!)
+        usernameAndCaptionLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
+        contentView.addSubview(commentLabel!)
+        commentLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
+//        let viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel)
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]]
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]]
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]]
+//        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]" options:kNilOptions metrics:nil views:viewDictionary]]
+//        self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView attribute:NSLayoutAttributeHeight
+//        relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
+//        self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
+//        self.commentLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_commentLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
+//        [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]]
+    }
+    
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     func usernameAndCaptionString() -> NSAttributedString {

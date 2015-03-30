@@ -21,25 +21,25 @@ class Media: NSObject {
         super.init()
         idNumber = mediaDictionary.valueForKey("id") as String
         user = User(userDictionary: mediaDictionary.valueForKey("user") as NSDictionary)
-        //let standardResolutionImageURLString = ((((mediaDictionary["images"] as? [NSObject : AnyObject]) ?? [NSObject : AnyObject]())["standard_resolution"] as? [NSObject : AnyObject]) ?? [NSObject : AnyObject]())["url"] as? [NSObject : AnyObject]
-        //
-        // or we can use valueForKeyPath but it could crash if standard_resolution does not exist, for example
         if let standardResolutionImageURLString  = mediaDictionary.valueForKeyPath("images.standard_resolution.url") as? String {
             let standardResolutionImageURL = NSURL(string: standardResolutionImageURLString)
             if standardResolutionImageURL != nil {
                 self.mediaURL = standardResolutionImageURL
             }
         }
-        let captionDictionary = mediaDictionary["caption"] as NSDictionary
-        if captionDictionary.isKindOfClass(NSDictionary) {
+        let captionDictionary = mediaDictionary["caption"] as? NSDictionary
+        if let captionDictionary = captionDictionary {
             self.caption = captionDictionary["text"] as String
         } else {
             self.caption = ""
         }
         var commentsArray = [Comment]()
-        for (key, commentDictionary) in (mediaDictionary.valueForKeyPath("comments.data") as NSDictionary) {
-            let comment = Comment(commentDictionary: commentDictionary as NSDictionary)
-            commentsArray.append(comment)
+        let commentData = mediaDictionary.valueForKeyPath("comments.data") as NSArray?
+        if let commentData = commentData {
+            for commentDictionary in commentData {
+                let comment = Comment(commentDictionary: commentDictionary as NSDictionary)
+                commentsArray.append(comment)
+            }
         }
         comments = commentsArray
     }

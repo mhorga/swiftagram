@@ -77,7 +77,7 @@ class ImagesTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> MediaTableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("mediaCell", forIndexPath:indexPath) as MediaTableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("mediaCell", forIndexPath: indexPath) as MediaTableViewCell
         cell.mediaItem = item()[indexPath.row] as? Media
         return cell
     }

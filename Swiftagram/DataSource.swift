@@ -26,7 +26,7 @@ class DataSource: NSObject {
     }
     
     func instagramClientID() -> NSString {
-        return ""
+        return "e9241ba8d61442b9861ce40d22e1452a"
     }
     
     override init () {
@@ -84,41 +84,11 @@ class DataSource: NSObject {
             }
 //        }
     }
-/*
-    - (void) parseDataFromFeedDictionary:(NSDictionary *) feedDictionary fromRequestWithParameters:(NSDictionary *)parameters {
-        NSArray *mediaArray = feedDictionary[@"data"];
-        NSMutableArray *tmpMediaItems = [NSMutableArray array];
-        for (NSDictionary *mediaDictionary in mediaArray) {
-            BLCMedia *mediaItem = [[BLCMedia alloc] initWithDictionary:mediaDictionary];
-            if (mediaItem) {
-                [tmpMediaItems addObject:mediaItem];
-                [self downloadImageForMediaItem:mediaItem];
-            }
-        }
-        NSMutableArray *mutableArrayWithKVO = [self mutableArrayValueForKey:@"mediaItems"];
-        if (parameters[@"min_id"]) {
-            // This was a pull-to-refresh request
-            NSRange rangeOfIndexes = NSMakeRange(0, tmpMediaItems.count);
-            NSIndexSet *indexSetOfNewObjects = [NSIndexSet indexSetWithIndexesInRange:rangeOfIndexes];
-            [mutableArrayWithKVO insertObjects:tmpMediaItems atIndexes:indexSetOfNewObjects];
-        } else if (parameters[@"max_id"]) {
-            // This was an infinite scroll request
-            if (tmpMediaItems.count == 0) {
-                // disable infinite scroll, since there are no more older messages
-                self.thereAreNoMoreOlderMessages = YES;
-            }
-            [mutableArrayWithKVO addObjectsFromArray:tmpMediaItems];
-        } else {
-            [self willChangeValueForKey:@"mediaItems"];
-            self.mediaItems = tmpMediaItems;
-            [self didChangeValueForKey:@"mediaItems"];
-        }
-    } 
-*/    
+    
     func parseDataFromFeedDictionary(feedDictionary: Dictionary<NSObject, AnyObject>, parameters: NSDictionary?) {
-        let mediaArray: AnyObject? = feedDictionary["data"]
+        let mediaArray = feedDictionary["data"] as NSArray
         var tmpMediaItems = [Media]()
-        for (index, mediaDictionary) in mediaArray as Dictionary<NSObject, AnyObject> {
+        for mediaDictionary in mediaArray {
             let mediaItem = Media(mediaDictionary: mediaDictionary as NSDictionary)
             if (mediaItem != NSNull()) {
                 tmpMediaItems.append(mediaItem)
@@ -174,9 +144,10 @@ class DataSource: NSObject {
                     if image != nil {
                         mediaItem.image = image
                         dispatch_async(dispatch_get_main_queue(), {
-                            var mutableArrayWithKVO = NSMutableArray().valueForKey("mediaItems") as NSMutableArray
-                            let index = mutableArrayWithKVO.indexOfObject(mediaItem)
-                            mutableArrayWithKVO.replaceObjectAtIndex(index, withObject: mediaItem)
+                            let index = find(self.mediaItems, mediaItem)
+                            //self.mediaItems.replaceObjectAtIndex(index, withObject: mediaItem)
+                            self.mediaItems.removeAtIndex(index!)
+                            self.mediaItems.append(mediaItem)
                         })
                     }
                 } else {

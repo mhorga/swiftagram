@@ -21,8 +21,8 @@ class User: NSObject {
         idNumber = userDictionary["id"] as String
         userName = userDictionary["username"] as String
         fullName = userDictionary["full_name"] as String
-        let profileURLString: AnyObject = userDictionary["profile_picture"]!
-        let profileURL = NSURL(coder: profileURLString as NSCoder)
+        let profileURLString = userDictionary["profile_picture"] as String
+        let profileURL = NSURL(string: profileURLString)
         profilePictureURL = profileURL
     }
 }
