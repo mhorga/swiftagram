@@ -35,9 +35,8 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
-    deinit {    //override func dealloc() {
+    deinit {
         clearInstagramCookies()
-        //webView!.delegate = nil
     }
     
     // This prevents caching the credentials in the cookie jar.

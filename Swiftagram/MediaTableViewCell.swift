@@ -22,7 +22,7 @@ class MediaTableViewCell: UITableViewCell {
 //            }
         }
     }
-    //var mediaImageView: UIImageView?
+    
     var usernameAndCaptionLabel: UILabel?
     var commentLabel: UILabel?
     var imageHeightConstraint: NSLayoutConstraint?
@@ -51,28 +51,6 @@ class MediaTableViewCell: UITableViewCell {
         paragraphStyle = mutableParagraphStyle
     }
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        let maxSize = CGSizeMake(CGRectGetWidth(self.bounds), CGFloat.max)
-//        let usernameLabelSize = usernameAndCaptionLabel!.sizeThatFits(maxSize)
-//        let commentLabelSize = commentLabel!.sizeThatFits(maxSize)
-//        //usernameAndCaptionLabelHeightConstraint!.constant = usernameLabelSize.height + 20
-//        //commentLabelHeightConstraint!.constant = commentLabelSize.height + 20
-//        separatorInset = UIEdgeInsetsMake(0, 0, 0, CGRectGetWidth(self.bounds))
-//    }
-    
-//    func setMediaItem(mediaItem: Media) {
-//        self.mediaItem = mediaItem
-//        mediaImageView!.image = self.mediaItem!.image
-//        //usernameAndCaptionLabel!.attributedText = usernameAndCaptionString()
-//        commentLabel!.attributedText = commentString()
-//        if self.mediaItem!.image != nil {
-//            imageHeightConstraint!.constant = mediaItem.image!.size.height / mediaItem.image!.size.width * CGRectGetWidth(contentView.bounds)
-//        } else {
-//            imageHeightConstraint!.constant = 0
-//        }
-//    }
-    
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -80,34 +58,6 @@ class MediaTableViewCell: UITableViewCell {
     override func setHighlighted(highlighted: Bool, animated : Bool) {
         super.setHighlighted(highlighted, animated: animated)
     }
-    
-//    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-//        super.init(style: style, reuseIdentifier: reuseIdentifier)
-//        mediaImageView = UIImageView()
-//        usernameAndCaptionLabel = UILabel()
-//        commentLabel = UILabel()
-//        commentLabel!.numberOfLines = 0
-//        contentView.addSubview(mediaImageView!)
-//        mediaImageView!.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        contentView.addSubview(usernameAndCaptionLabel!)
-//        usernameAndCaptionLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
-//        contentView.addSubview(commentLabel!)
-//        commentLabel!.setTranslatesAutoresizingMaskIntoConstraints(false)
-////        let viewDictionary = NSDictionaryOfVariableBindings(_mediaImageView, _usernameAndCaptionLabel, _commentLabel)
-////        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_mediaImageView]|" options:kNilOptions metrics:nil views:viewDictionary]]
-////        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_usernameAndCaptionLabel]|" options:kNilOptions metrics:nil views:viewDictionary]]
-////        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[_commentLabel]|" options:kNilOptions metrics:nil views:viewDictionary]]
-////        [self.contentView addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel]" options:kNilOptions metrics:nil views:viewDictionary]]
-////        self.imageHeightConstraint = [NSLayoutConstraint constraintWithItem:_mediaImageView attribute:NSLayoutAttributeHeight
-////        relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-////        self.usernameAndCaptionLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_usernameAndCaptionLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-////        self.commentLabelHeightConstraint = [NSLayoutConstraint constraintWithItem:_commentLabel attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1 constant:100]
-////        [self.contentView addConstraints:@[self.imageHeightConstraint, self.usernameAndCaptionLabelHeightConstraint, self.commentLabelHeightConstraint]]
-//    }
-    
-//    required init(coder aDecoder: NSCoder) {
-//        super.init(coder: aDecoder)
-//    }
     
     func usernameAndCaptionString() -> NSAttributedString {
         let usernameFontSize: CGFloat = 15

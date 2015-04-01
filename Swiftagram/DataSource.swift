@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import KeychainAccess
 
 typealias NewItemCompletionBlock = ((NSErrorPointer?) -> Void)
 
 class DataSource: NSObject {
+    
     // only readable from outside but writable from inside
     private(set) internal var mediaItems = [Media]()
     var accessToken: String?
     var isRefreshing: Bool?
     var isLoadingOlderItems: Bool?
     var thereAreNoMoreOlderMessages: Bool?
+    let keychain = Keychain()
     
     class var sharedInstance: DataSource {
         struct Singleton {
@@ -31,58 +34,63 @@ class DataSource: NSObject {
     
     override init () {
         super.init()
-        registerForAccessTokenNotification()
+        self.accessToken = self.keychain["access token"]
+        if (self.accessToken == nil) {
+            registerForAccessTokenNotification()
+        } else {
+//            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+//                let fullPath = self.pathForFilename("mediaItems")
+//                let storedMediaItems = NSKeyedUnarchiver.unarchiveObjectWithFile(fullPath) as? [Media]
+//                dispatch_async(dispatch_get_main_queue()) {
+//                    if (storedMediaItems!.count > 0) {
+//                        var mutableMediaItems = storedMediaItems
+//                        self.willChangeValueForKey("mediaItems")
+//                        self.mediaItems = mutableMediaItems!
+//                        self.didChangeValueForKey("mediaItems")
+//                    } else {
+                        populateDataWithParameters(nil, completionHandler: nil)
+//                     }
+//                }
+//            }
+        }
     }
    
     func registerForAccessTokenNotification() {
         NSNotificationCenter.defaultCenter().addObserverForName(LoginViewController().LoginViewControllerDidGetAccessTokenNotification, object: nil, queue: nil, usingBlock: { (note: NSNotification?) in
             self.accessToken = note!.object as? String
+            self.keychain.set(self.accessToken!, key:"access token")
             self.populateDataWithParameters(nil, completionHandler: nil)
         })
     }
     
     func populateDataWithParameters(parameters: NSDictionary?, completionHandler: NewItemCompletionBlock?) {
-//        if let parameters = parameters {
-            if accessToken != nil {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
-                    var urlString = "https://api.instagram.com/v1/users/self/feed?access_token=\(self.accessToken!)"
-                    if let parameters = parameters {
-                        for (parameterName, value) in parameters {
-                            let paramName = parameterName as String
-                            let params = value as String
-                            urlString += "&\(paramName)=\(params)"
+        if accessToken != nil {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), {
+                var urlString = "https://api.instagram.com/v1/users/self/feed?access_token=\(self.accessToken!)"
+                if let parameters = parameters {
+                    for (parameterName, value) in parameters {
+                        let paramName = parameterName as String
+                        let params = value as String
+                        urlString += "&\(paramName)=\(params)"
+                    }
+                }
+                let url = NSURL(string: urlString)
+                if url != nil {
+                    let request = NSURLRequest(URL: url!)
+                    let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?>=nil
+                    let webError = NSErrorPointer()
+                    let responseData: NSData =  NSURLConnection.sendSynchronousRequest(request, returningResponse: response, error: webError)!
+                    let jsonError = NSErrorPointer()
+                    let feedDictionary = NSJSONSerialization.JSONObjectWithData(responseData, options: nil, error: jsonError) as NSDictionary
+                    dispatch_async(dispatch_get_main_queue(), {
+                        self.parseDataFromFeedDictionary(feedDictionary, parameters: parameters)
+                        if completionHandler != nil {
+                            completionHandler!(nil)
                         }
-                    }
-                    let url = NSURL(string: urlString)
-                    if url != nil {
-                        let request = NSURLRequest(URL: url!)
-                        let response: AutoreleasingUnsafeMutablePointer<NSURLResponse?>=nil
-                        let webError = NSErrorPointer()
-                        let responseData: NSData =  NSURLConnection.sendSynchronousRequest(request, returningResponse: response, error: webError)!
-//                        if responseData != NSNull() {
-                            let jsonError = NSErrorPointer()
-                            let feedDictionary = NSJSONSerialization.JSONObjectWithData(responseData, options: nil, error: jsonError) as NSDictionary
-//                            if feedDictionary != NSNull() {
-                                dispatch_async(dispatch_get_main_queue(), {
-                                    self.parseDataFromFeedDictionary(feedDictionary, parameters: parameters)
-                                    if completionHandler != nil {
-                                        completionHandler!(nil)
-                                    }
-                                })
-//                            } else if (completionHandler != nil) {
-//                                dispatch_async(dispatch_get_main_queue(), {
-//                                    completionHandler!(jsonError)
-//                                })
-//                            }
-//                        } else if (completionHandler != nil) {
-//                            dispatch_async(dispatch_get_main_queue(), {
-//                                completionHandler!(webError)
-//                            })
-//                        }
-                    }
-                })
-            }
-//        }
+                    })
+                }
+            })
+        }
     }
     
     func parseDataFromFeedDictionary(feedDictionary: Dictionary<NSObject, AnyObject>, parameters: NSDictionary?) {
@@ -114,13 +122,6 @@ class DataSource: NSObject {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
                 let numberOfItemsToSave = min(self.mediaItems.count, 50)
                 let mediaItemsToSave = self.mediaItems[0 ..< numberOfItemsToSave]
-                //let fullPath = pathForFilename(NSStringFromSelector(mediaItems))
-                //let mediaItemData = NSKeyedArchiver.archivedDataWithRootObject(mediaItemsToSave)
-                var dataError: NSError
-                //let wroteSuccessfully = mediaItemData.writeToFile(fullPath, options: .DataWritingAtomic | .DataWritingFileProtectionCompleteUnlessOpen, error: &dataError)
-                //if (!wroteSuccessfully) {
-                    //println("Couldn't write file: \(dataError)")
-                //}
             }
         }
     }

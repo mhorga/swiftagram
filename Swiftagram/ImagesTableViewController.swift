@@ -15,7 +15,6 @@ class ImagesTableViewController: UITableViewController {
         DataSource.sharedInstance.addObserver(self, forKeyPath: "mediaItems", options: nil, context: nil)
         refreshControl = UIRefreshControl()
         refreshControl!.addTarget(self, action: "refreshControlDidFire:", forControlEvents: UIControlEvents.ValueChanged)
-        //tableView.registerClass(MediaTableViewCell.self, forCellReuseIdentifier: "mediaCell")
     }
     
     func refreshControlDidFire(sender: UIRefreshControl) {
@@ -24,7 +23,7 @@ class ImagesTableViewController: UITableViewController {
         })
     }
     
-    deinit {    // override func dealloc()
+    deinit {
         DataSource.sharedInstance.removeObserver(self, forKeyPath:"mediaItems")
     }
     
