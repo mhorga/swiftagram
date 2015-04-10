@@ -10,7 +10,7 @@ import UIKit
 
 class LoginViewController: UIViewController, UIWebViewDelegate {
 
-    let LoginViewControllerDidGetAccessTokenNotification = "LoginViewControllerDidGetAccessTokenNotification"
+    let notification = "LoginViewControllerDidGetAccessTokenNotification"
     var webView: UIWebView?
     
     func redirectURI() -> NSString {
@@ -37,27 +37,26 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
     
     deinit {
         clearInstagramCookies()
+        self.webView?.delegate = nil
     }
     
-    // This prevents caching the credentials in the cookie jar.
     func clearInstagramCookies() {
-        var cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as [NSHTTPCookie]
+        var cookies = NSHTTPCookieStorage.sharedHTTPCookieStorage().cookies as! [NSHTTPCookie]
         for cookie in cookies {
-            let domainRange = cookie.domain.rangeOfString("instagram.com") as Range<String.Index>?
-            //if domainRange.location != NSNotFound {
+            let domainRange = cookie.domain.rangeOfString("instagram.com")
+//            if domainRange.location != NSNotFound {
                 NSHTTPCookieStorage.sharedHTTPCookieStorage().deleteCookie(cookie)
-            //}
+//            }
         }
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        let urlString = NSString(string: request.URL.absoluteString!)
-        if urlString.hasPrefix(redirectURI()) {
-            // This contains our auth token
+        let urlString = NSString(string: request.URL!.absoluteString!)
+        if urlString.hasPrefix(redirectURI() as String) {
             let rangeOfAccessTokenParameter = urlString.rangeOfString("access_token=")
             let indexOfTokenStarting = rangeOfAccessTokenParameter.location + rangeOfAccessTokenParameter.length
             let accessToken = urlString.substringFromIndex(indexOfTokenStarting)
-            NSNotificationCenter.defaultCenter().postNotificationName(LoginViewControllerDidGetAccessTokenNotification, object: accessToken)
+            NSNotificationCenter.defaultCenter().postNotificationName(notification, object: accessToken)
             return false
         }
         if (navigationType == UIWebViewNavigationType.LinkClicked){

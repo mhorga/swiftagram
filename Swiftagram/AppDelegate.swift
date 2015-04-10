@@ -9,6 +9,7 @@
 import UIKit
 
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -20,12 +21,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if (DataSource.sharedInstance.accessToken == nil) {
             let loginVC = LoginViewController()
             navVC.setViewControllers([loginVC], animated: true)
-            NSNotificationCenter.defaultCenter().addObserverForName(LoginViewController().LoginViewControllerDidGetAccessTokenNotification, object: nil, queue: nil, usingBlock: { (note: NSNotification?) in
-                let imagesVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as ImagesTableViewController
+            NSNotificationCenter.defaultCenter().addObserverForName(LoginViewController().notification, object: nil, queue: nil, usingBlock: { (note: NSNotification?) in
+                let imagesVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! ImagesTableViewController
                 navVC.setViewControllers([imagesVC], animated: true)
             })
         } else {
-            let imagesVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as ImagesTableViewController
+            let imagesVC = UIStoryboard(name: "Main", bundle: nil).instantiateInitialViewController() as! ImagesTableViewController
             navVC.setViewControllers([imagesVC], animated: true)
         }
         window?.rootViewController = navVC
@@ -33,6 +34,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         return true
     }
-
 }
-
