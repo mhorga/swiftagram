@@ -56,8 +56,8 @@ class CircleSpinnerView: UIView {
             self.circleLayer!.lineCap = kCALineCapRound
             self.circleLayer!.lineJoin = kCALineJoinBevel
             self.circleLayer!.path = smoothedPath.CGPath
-            var maskLayer = CALayer().presentationLayer() as! CALayer
-            maskLayer.contents = UIImage(named: "angle-mask")!.CGImage
+            var maskLayer = CALayer()
+            //maskLayer.contents = UIImage(named: "angle-mask")!.CGImage
             maskLayer.frame = self.circleLayer!.bounds
             self.circleLayer!.mask = maskLayer
             let animationDuration = 1 as CFTimeInterval
@@ -72,18 +72,18 @@ class CircleSpinnerView: UIView {
             animation.fillMode = kCAFillModeForwards
             animation.autoreverses = false
             self.circleLayer!.mask.addAnimation(animation, forKey: "rotate")
-            let animationGroup = CAAnimation() as! CAAnimationGroup
+            let animationGroup = CAAnimation()
             animationGroup.duration = animationDuration
             animationGroup.repeatCount = Float.infinity
             animationGroup.removedOnCompletion = false
             animationGroup.timingFunction = linearCurve
-            let strokeStartAnimation = CAPropertyAnimation(keyPath: "strokeStart") as! CABasicAnimation
-            strokeStartAnimation.fromValue = 0.015
-            strokeStartAnimation.toValue = 0.515
-            let strokeEndAnimation = CAPropertyAnimation(keyPath: "strokeEnd") as! CABasicAnimation
-            strokeEndAnimation.fromValue = 0.485
-            strokeEndAnimation.toValue = 0.985
-            animationGroup.animations = [strokeStartAnimation, strokeEndAnimation]
+            let strokeStartAnimation = CAPropertyAnimation(keyPath: "strokeStart")
+            //strokeStartAnimation.fromValue = 0.015
+            //strokeStartAnimation.toValue = 0.515
+            let strokeEndAnimation = CAPropertyAnimation(keyPath: "strokeEnd")
+            //strokeEndAnimation.fromValue = 0.485
+            //strokeEndAnimation.toValue = 0.985
+            //animationGroup.animations = [strokeStartAnimation, strokeEndAnimation]
             self.circleLayer!.addAnimation(animationGroup, forKey: "progress")
         }
         return self.circleLayer!

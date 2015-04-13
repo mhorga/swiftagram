@@ -218,8 +218,7 @@ class DataSource: NSObject {
                 var error: NSErrorPointer = nil
                 var imageData: NSData =  NSURLConnection.sendSynchronousRequest(request, returningResponse: response, error: nil)!
                 if imageData != NSNull() {
-                    let image = UIImage(data: imageData)
-                    if image != nil {
+                    if let image = UIImage(data: imageData) {
                         mediaItem.image = image
                         dispatch_async(dispatch_get_main_queue(), {
                             let index = find(self.mediaItems, mediaItem)

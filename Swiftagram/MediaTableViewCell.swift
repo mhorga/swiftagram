@@ -139,25 +139,25 @@ class MediaTableViewCell: UITableViewCell, UIGestureRecognizerDelegate, ComposeC
     
     func createPadConstraints() {
         let viewDictionary = ["self.mediaImageView" : self.mediaImageView!, "self.usernameAndCaptionLabel" : self.usernameAndCaptionLabel!, "self.commentLabel" : self.commentLabel!, "self.likeButton" : self.likeButton!, "self.commentView" : self.commentView!]
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[_mediaImageView(==320)]", options: nil, metrics: nil, views: viewDictionary))
-        self.contentView.addConstraint(NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation(rawValue: 0)!, toItem: self.mediaImageView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
+        //self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[self.mediaImageView(==320)]", options: nil, metrics: nil, views: viewDictionary))
+        //self.contentView.addConstraint(NSLayoutConstraint(item: self.contentView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation(rawValue: 0)!, toItem: self.mediaImageView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0))
     }
     
     func createPhoneConstraints() {
         let viewDictionary = ["self.mediaImageView" : self.mediaImageView!, "self.usernameAndCaptionLabel" : self.usernameAndCaptionLabel!, "self.commentLabel" : self.commentLabel!, "self.likeButton" : self.likeButton!, "self.commentView" : self.commentView!]
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_mediaImageView]|", options: nil, metrics: nil, views: viewDictionary))
+        //self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[self.mediaImageView]|", options: nil, metrics: nil, views: viewDictionary))
     }
     
     func createCommonConstraints() {
         let viewDictionary = ["self.mediaImageView" : self.mediaImageView!, "self.usernameAndCaptionLabel" : self.usernameAndCaptionLabel!, "self.commentLabel" : self.commentLabel!, "self.likeButton" : self.likeButton!, "self.commentView" : self.commentView!]
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_usernameAndCaptionLabel][_likeButton(==38)]|", options: NSLayoutFormatOptions.AlignAllTop | NSLayoutFormatOptions.AlignAllBottom, metrics: nil, views: viewDictionary))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_commentLabel]|", options: nil, metrics: nil, views: viewDictionary))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_commentView]|", options: nil, metrics: nil, views: viewDictionary))
-        self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[_mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]", options: nil, metrics: nil, views: viewDictionary))
+        //self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_usernameAndCaptionLabel][_likeButton(==38)]|", options: NSLayoutFormatOptions.AlignAllTop | NSLayoutFormatOptions.AlignAllBottom, metrics: nil, views: viewDictionary))
+        //self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_commentLabel]|", options: nil, metrics: nil, views: viewDictionary))
+        //self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[_commentView]|", options: nil, metrics: nil, views: viewDictionary))
+        //self.contentView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[self.mediaImageView][_usernameAndCaptionLabel][_commentLabel][_commentView(==100)]", options: nil, metrics: nil, views: viewDictionary))
         self.imageHeightConstraint = NSLayoutConstraint(item: self.mediaImageView!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 100)
         self.usernameAndCaptionLabelHeightConstraint = NSLayoutConstraint(item: self.usernameAndCaptionLabel!, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 100)
         self.commentLabelHeightConstraint = NSLayoutConstraint(item: self.commentLabel!, attribute: NSLayoutAttribute.Height, relatedBy:NSLayoutRelation.Equal, toItem: nil, attribute:NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: 100)
-        self.contentView.addConstraints([self.imageHeightConstraint!, self.usernameAndCaptionLabelHeightConstraint!, self.commentLabelHeightConstraint!])
+        //self.contentView.addConstraints([self.imageHeightConstraint!, self.usernameAndCaptionLabelHeightConstraint!, self.commentLabelHeightConstraint!])
     }
     
 //    - (void)awakeFromNib {}
@@ -236,10 +236,10 @@ class MediaTableViewCell: UITableViewCell, UIGestureRecognizerDelegate, ComposeC
     func usernameAndCaptionString() -> NSAttributedString {
         let usernameFontSize: CGFloat = 15
         let baseString: NSString = "\(mediaItem!.user!.userName) \(mediaItem!.caption)"
-        let mutableUsernameAndCaptionString = NSMutableAttributedString(string: baseString as String, attributes: [NSFontAttributeName: self.lightFont!.fontWithSize(usernameFontSize), NSParagraphStyleAttributeName : paragraphStyle!])
+        let mutableUsernameAndCaptionString = NSMutableAttributedString() //NSMutableAttributedString(string: baseString as String, attributes: [NSFontAttributeName: self.lightFont!.fontWithSize(usernameFontSize), NSParagraphStyleAttributeName : paragraphStyle!])
         let usernameRange = baseString.rangeOfString(mediaItem!.user!.userName)
-        mutableUsernameAndCaptionString.addAttribute(NSFontAttributeName, value: boldFont!.fontWithSize(usernameFontSize), range: usernameRange)
-        mutableUsernameAndCaptionString.addAttribute(NSForegroundColorAttributeName, value: linkColor!, range: usernameRange)
+        //mutableUsernameAndCaptionString.addAttribute(NSFontAttributeName, value: boldFont!.fontWithSize(usernameFontSize), range: usernameRange)
+        //mutableUsernameAndCaptionString.addAttribute(NSForegroundColorAttributeName, value: linkColor!, range: usernameRange)
         return mutableUsernameAndCaptionString
     }
     
@@ -247,10 +247,10 @@ class MediaTableViewCell: UITableViewCell, UIGestureRecognizerDelegate, ComposeC
         let commentString = NSMutableAttributedString()
         for comment in mediaItem!.comments {
             let baseString: NSString = "\(comment.from!.userName) \(comment.text)\n"
-            let oneCommentString = NSMutableAttributedString(string: baseString as String, attributes: [NSFontAttributeName: self.lightFont!, NSParagraphStyleAttributeName : paragraphStyle!])
+            let oneCommentString = NSMutableAttributedString() //NSMutableAttributedString(string: baseString as String, attributes: [NSFontAttributeName: self.lightFont!, NSParagraphStyleAttributeName : paragraphStyle!])
             let usernameRange = baseString.rangeOfString(comment.from!.userName)
-            oneCommentString.addAttribute(NSFontAttributeName, value:boldFont!, range:usernameRange)
-            oneCommentString.addAttribute(NSForegroundColorAttributeName, value:linkColor!, range:usernameRange)
+            //oneCommentString.addAttribute(NSFontAttributeName, value:boldFont!, range:usernameRange)
+            //oneCommentString.addAttribute(NSForegroundColorAttributeName, value:linkColor!, range:usernameRange)
             commentString.appendAttributedString(oneCommentString)
         }
         return commentString
