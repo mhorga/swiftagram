@@ -15,11 +15,16 @@ class CircleSpinnerView: UIView {
     var strokeColor: UIColor?
     var circleLayer: CAShapeLayer?
     
-    convenience override init(frame: CGRect) {
-        self.init(frame: frame)
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.strokeThickness = 1
         self.radius = 12
         self.strokeColor = UIColor.purpleColor()
+        circlelayer()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     override func willMoveToSuperview(newSuperview: UIView?) {
@@ -42,7 +47,7 @@ class CircleSpinnerView: UIView {
             let arcCenter = CGPointMake(self.radius!+self.strokeThickness!/2+5, self.radius!+self.strokeThickness!/2+5)
             let rect = CGRectMake(0, 0, arcCenter.x*2, arcCenter.y*2);
             let smoothedPath = UIBezierPath(arcCenter: arcCenter, radius: self.radius!, startAngle: CGFloat(M_PI*3/2), endAngle: CGFloat(M_PI/2+M_PI*5), clockwise: true)
-            self.circleLayer = CAShapeLayer().presentationLayer() as? CAShapeLayer
+            self.circleLayer = CAShapeLayer()
             self.circleLayer!.contentsScale = UIScreen.mainScreen().scale
             self.circleLayer!.frame = rect
             self.circleLayer!.fillColor = UIColor.clearColor().CGColor
@@ -84,24 +89,12 @@ class CircleSpinnerView: UIView {
         return self.circleLayer!
     }
     
-//    func setFrame(frame: CGRect) {
-//        super.frame = frame
-//        if self.superview != nil {
-//             self.layoutAnimatedLayer()
-//        }
-//    }
-    
     func setRadius(radius: CGFloat) {
         self.radius = radius
         self.circleLayer!.removeFromSuperlayer()
         self.circleLayer = nil
         self.layoutAnimatedLayer()
     }
-    
-//    func setStrokeColor(strokeColor: UIColor) {
-//        self.strokeColor = strokeColor
-//        self.circleLayer!.strokeColor = strokeColor.CGColor
-//    }
     
     func setStrokeThickness(strokeThickness: CGFloat) {
         self.strokeThickness = strokeThickness

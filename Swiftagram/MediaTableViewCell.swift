@@ -82,8 +82,8 @@ class MediaTableViewCell: UITableViewCell, UIGestureRecognizerDelegate, ComposeC
         return CGRectGetMaxY(layoutCell.commentLabel!.frame)
     }
 
-     func initWith(style: UITableViewCellStyle, reuseIdentifier: NSString) {
-        //super.initWithStyle(style, reuseIdentifier: reuseIdentifier)
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.mediaImageView = UIImageView()
         self.mediaImageView!.userInteractionEnabled = true
         self.tapGestureRecognizer = UITapGestureRecognizer(target: self, action: "tapFired")
@@ -98,7 +98,7 @@ class MediaTableViewCell: UITableViewCell, UIGestureRecognizerDelegate, ComposeC
         self.commentLabel = UILabel()
         self.commentLabel!.numberOfLines = 0
         self.commentLabel!.backgroundColor = commentLabelGray
-        self.likeButton = LikeButton()
+        self.likeButton = LikeButton(frame: CGRectZero)
         self.likeButton!.addTarget(self, action: "likePressed", forControlEvents: UIControlEvents.TouchUpInside)
         self.likeButton!.backgroundColor = usernameLabelGray
         self.commentView = ComposeCommentView()
@@ -114,6 +114,10 @@ class MediaTableViewCell: UITableViewCell, UIGestureRecognizerDelegate, ComposeC
         self.contentView.addSubview(self.commentView!)
 //        self.commentView.translatesAutoresizingMaskIntoConstraints() = false
         self.createConstraints()
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
     func isPhone() -> Bool {

@@ -25,14 +25,18 @@ class LikeButton: UIButton {
     let kUnlikedStateImage = "heart-empty"
     var spinnerView: CircleSpinnerView?
     
-    convenience init() {
-        self.init()
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         self.spinnerView = CircleSpinnerView(frame: CGRectMake(0, 0, 44, 44))
         self.addSubview(self.spinnerView!)
         self.imageView!.contentMode = UIViewContentMode.ScaleAspectFit
         self.contentEdgeInsets = UIEdgeInsetsMake(10, 10, 10, 10)
         self.contentVerticalAlignment = UIControlContentVerticalAlignment.Top
         self.likeButtonState = LikeState.LikeStateNotLiked
+    }
+
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
 
     override func layoutSubviews() {
