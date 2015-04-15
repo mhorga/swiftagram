@@ -33,7 +33,7 @@ class CropImageViewController: MediaFullScreenViewController {
         super.viewDidLoad()
         self.view.clipsToBounds = true
         self.view.addSubview(self.cropBox!)
-        let rightButton = UIBarButtonItem(title: NSLocalizedString("Crop", comment: "Crop command"), style:.Done, target: self, action: "cropPressed")
+        let rightButton = UIBarButtonItem(title: NSLocalizedString("Crop", comment: "Crop command"), style:.Done, target: self, action: "cropPressed:")
         self.navigationItem.title = NSLocalizedString("Crop Image", comment: "")
         self.navigationItem.rightBarButtonItem = rightButton
         self.automaticallyAdjustsScrollViewInsets = false

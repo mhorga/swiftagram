@@ -41,7 +41,7 @@ class ImageLibraryViewController: UICollectionViewController, CropImageViewContr
         self.collectionView!.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "reusable view")
         self.collectionView!.backgroundColor = UIColor.whiteColor()
         let cancelImage = UIImage(named: "x")
-        let cancelButton = UIBarButtonItem(image: cancelImage, style:.Done, target: self, action: "cancelPressed")
+        let cancelButton = UIBarButtonItem(image: cancelImage, style:.Done, target: self, action: "cancelPressed:")
         self.navigationItem.leftBarButtonItem = cancelButton
     }
     

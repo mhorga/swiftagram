@@ -28,9 +28,9 @@ class CameraToolbar: UIView {
         self.leftButton = UIButton.buttonWithType(.Custom) as? UIButton
         self.cameraButton = UIButton.buttonWithType(.Custom) as? UIButton
         self.rightButton = UIButton.buttonWithType(.Custom) as? UIButton
-        self.leftButton!.addTarget(self, action: "leftButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        self.cameraButton!.addTarget(self, action: "cameraButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
-        self.rightButton!.addTarget(self, action: "rightButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.leftButton!.addTarget(self, action: "leftButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.cameraButton!.addTarget(self, action: "cameraButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.rightButton!.addTarget(self, action: "rightButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.leftButton!.setImage(UIImage(CGImage: imageNames.firstObject as! CGImage), forState: UIControlState.Normal)
         self.rightButton!.setImage(UIImage(CGImage: imageNames.lastObject as! CGImage), forState:UIControlState.Normal)
         self.cameraButton!.setImage(UIImage(named: "camera"), forState: UIControlState.Normal)

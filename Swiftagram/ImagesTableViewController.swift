@@ -31,7 +31,7 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
         self.tableView.registerClass(MediaTableViewCell.self, forCellReuseIdentifier: "mediaCell")
         self.tableView.keyboardDismissMode = UIScrollViewKeyboardDismissMode.Interactive
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) || UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
-                let cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "cameraPressed")
+                let cameraButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Camera, target: self, action: "cameraPressed:")
                 self.navigationItem.rightBarButtonItem = cameraButton
         }
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "keyboardWillShow", name: UIKeyboardWillShowNotification, object: nil)
@@ -72,7 +72,7 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
         var imageVC: UIViewController?
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera) {
             var cameraVC = CameraViewController()
-            //cameraVC.delegate = self
+            cameraVC.delegate = self
             imageVC = cameraVC
         } else if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.SavedPhotosAlbum) {
             var imageLibraryVC = ImageLibraryViewController()
@@ -89,10 +89,9 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
                 self.cameraPopover!.presentPopoverFromBarButtonItem(sender, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
             }
         }
-        //return
     }
     
-//    func cameraViewController(cameraViewController: CameraViewController, didCompleteWithImage image: UIImage) {
+//    func cameraViewController(_: CameraViewController, didCompleteWithImage image: UIImage?) {
 //        self.handleImage(image, withNavigationController: cameraViewController.navigationController!)
 //    }
     
@@ -127,7 +126,7 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> MediaTableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("mediaCell", forIndexPath: indexPath) as! MediaTableViewCell
         cell.mediaItem = item()[indexPath.row] as? Media
-        
+        cell.delegate = self
         return cell
     }
     
@@ -147,13 +146,6 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
             let media = item()[indexPath.row] as! Media
             DataSource.sharedInstance.deleteMediaItem(media)
         }
-    }
-    
-    
-    func refreshControlDidFire(sender: UIRefreshControl) {
-        DataSource.sharedInstance.requestNewItemsWithCompletionHandler({ (error: NSErrorPointer?) in
-            sender.endRefreshing()
-        })
     }
     
     override func tableView(tableView: UITableView, estimatedHeightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -192,6 +184,12 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
     
     // MARK: - Getting More Data
     
+    func refreshControlDidFire(sender: UIRefreshControl) {
+        DataSource.sharedInstance.requestNewItemsWithCompletionHandler({ (error: NSErrorPointer?) in
+            sender.endRefreshing()
+        })
+    }
+    
     func infiniteScrollIfNecessary() {
         let bottomIndexPath = tableView.indexPathsForVisibleRows()!.last as! NSIndexPath
         if (bottomIndexPath.row == item().count - 1) {
@@ -206,6 +204,129 @@ class ImagesTableViewController: UITableViewController, UIViewControllerTransiti
         //- (void)scrollViewDidScroll:(UIScrollView *)scrollView {           // called ~700 times
         //counter++
         //NSLog(@"%d", counter)
-        //infiniteScrollIfNecessary()
+        infiniteScrollIfNecessary()
+    }
+    
+    // MARK: - MediaTableViewCellDelegate
+    
+    func cell(cell: MediaTableViewCell, didTapImageView imageView: UIImageView) {
+        self.lastTappedImageView = imageView
+        let fullScreenVC = MediaFullScreenViewController(media: cell.mediaItem!)
+        if isPhone() {
+            fullScreenVC.transitioningDelegate = self
+            fullScreenVC.modalPresentationStyle = UIModalPresentationStyle.Custom
+        } else {
+            fullScreenVC.modalPresentationStyle = UIModalPresentationStyle.FormSheet
+        }
+        presentViewController(fullScreenVC, animated:true, completion: nil)
+    }
+        
+    func cell(cell: MediaTableViewCell, didLongPressImageView imageView:UIImageView) {
+        var itemsToShare = [AnyObject]()
+        if count(cell.mediaItem!.caption) > 0 {
+            itemsToShare.append(cell.mediaItem!.caption)
+        }
+        if cell.mediaItem!.image != nil {
+            itemsToShare.append(cell.mediaItem!.image!)
+        }
+        if itemsToShare.count > 0 {
+            let activityVC = UIActivityViewController(activityItems: itemsToShare, applicationActivities: nil)
+            presentViewController(activityVC, animated: true, completion: nil)
+        }
+    }
+    
+    func cellDidPressLikeButton(cell: MediaTableViewCell) {
+        DataSource.sharedInstance.toggleLikeOnMediaItem(cell.mediaItem!)
+    }
+    
+    func cellWillStartComposingComment(cell: MediaTableViewCell) {
+        self.lastSelectedCommentView = cell.commentView
+    }
+    
+    func cell(cell: MediaTableViewCell, didComposeComment comment: NSString) {
+        DataSource.sharedInstance.commentOnMediaItem(cell.mediaItem!, commentText: comment)
+    }
+    
+    // MARK: - UIViewControllerTransitioningDelegate
+    
+    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let animator = MediaFullScreenAnimator()
+        animator.presenting = true
+        animator.cellImageView = self.lastTappedImageView
+        return animator
+    }
+    
+    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        let animator = MediaFullScreenAnimator()
+        animator.cellImageView = self.lastTappedImageView
+        return animator
+    }
+    
+    // MARK: - Popover Handling
+    
+    func imageDidFinish(notification: NSNotification) {
+        if isPhone() {
+            dismissViewControllerAnimated(true, completion: nil)
+        } else {
+            cameraPopover!.dismissPopoverAnimated(true)
+            self.cameraPopover = nil
+        }
+    }
+    
+    // MARK: - Keyboard Handling
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let frameValue: NSValue = notification.userInfo?[UIKeyboardFrameEndUserInfoKey] as! NSValue
+        let keyboardFrameInScreenCoordinates = frameValue.CGRectValue
+        let keyboardFrameInViewCoordinates = navigationController!.view.convertRect( keyboardFrameInScreenCoordinates(), fromView: nil)
+        let commentViewFrameInViewCoordinates = navigationController!.view.convertRect( lastSelectedCommentView!.bounds, fromView: self.lastSelectedCommentView)
+        var contentOffset = self.tableView.contentOffset
+        var contentInsets = self.tableView.contentInset
+        var scrollIndicatorInsets = self.tableView.scrollIndicatorInsets
+        var heightToScroll: CGFloat = 0
+        let keyboardY = CGRectGetMinY(keyboardFrameInViewCoordinates)
+        let commentViewY = CGRectGetMinY(commentViewFrameInViewCoordinates)
+        let difference = commentViewY - keyboardY
+        if difference > 0 {
+            heightToScroll += difference
+        }
+        if CGRectIntersectsRect(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates) {
+            let intersectionRect = CGRectIntersection(keyboardFrameInViewCoordinates, commentViewFrameInViewCoordinates);
+            heightToScroll += CGRectGetHeight(intersectionRect);
+        }
+        if heightToScroll > 0 {
+            contentInsets.bottom += heightToScroll
+            scrollIndicatorInsets.bottom += heightToScroll
+            contentOffset.y += heightToScroll;
+            let durationNumber = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+            let curveNumber = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
+            let duration = durationNumber.doubleValue as NSTimeInterval
+            let curve = curveNumber.rawValue //curveNumber.unsignedIntegerValueas as UIViewAnimationCurve
+            let options = curve << 16 //as UIViewAnimationOptions
+            UIView.animateWithDuration(duration, delay: 0, options: nil //options
+                , animations: {
+                self.tableView.contentInset = contentInsets;
+                self.tableView.scrollIndicatorInsets = scrollIndicatorInsets;
+                self.tableView.contentOffset = contentOffset;
+            }, completion: nil)
+        }
+        self.lastKeyboardAdjustment = heightToScroll;
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var contentInsets = self.tableView.contentInset
+        contentInsets.bottom -= self.lastKeyboardAdjustment!
+        var scrollIndicatorInsets = self.tableView.scrollIndicatorInsets
+        scrollIndicatorInsets.bottom -= self.lastKeyboardAdjustment!
+        let durationNumber = notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as! NSNumber
+        let curveNumber = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as! UIViewAnimationCurve
+        let duration = durationNumber.doubleValue as NSTimeInterval
+        let curve = curveNumber.rawValue //curveNumber.unsignedIntegerValueas as UIViewAnimationCurve
+        let options = curve << 16 // as UIViewAnimationOptions
+        UIView.animateWithDuration(duration, delay: 0, options: nil //options
+            , animations: {
+            self.tableView.contentInset = contentInsets
+            self.tableView.scrollIndicatorInsets = scrollIndicatorInsets
+        }, completion: nil)
     }
 }

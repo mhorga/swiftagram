@@ -60,7 +60,7 @@ class LoginViewController: UIViewController, UIWebViewDelegate {
             return false
         }
         if (navigationType == UIWebViewNavigationType.LinkClicked){
-            let backButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "Back")
+            let backButton = UIBarButtonItem(title: "Back", style: .Plain, target: self, action: "Back:")
             navigationItem.leftBarButtonItem = backButton
         }
         return true

@@ -222,9 +222,9 @@ class DataSource: NSObject {
                         mediaItem.image = image
                         dispatch_async(dispatch_get_main_queue(), {
                             let index = find(self.mediaItems, mediaItem)
-                            //self.mediaItems.replaceObjectAtIndex(index, withObject: mediaItem)
-                            self.mediaItems.removeAtIndex(index!)
-                            self.mediaItems.append(mediaItem)
+                            self.mediaItems[index!] = mediaItem
+//                            self.mediaItems.removeAtIndex(index!)
+//                            self.mediaItems.append(mediaItem)
                         })
                     }
                 } else {

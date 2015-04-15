@@ -32,7 +32,7 @@ class MediaFullScreenAnimator: NSObject, UIViewControllerAnimatedTransitioning {
             UIView.animateWithDuration(self.transitionDuration(transitionContext), animations: {
                 fromViewController!.view.tintAdjustmentMode = UIViewTintAdjustmentMode.Dimmed
                 fullScreenVC.view.frame = endFrame
-//                fullScreenVC.centerScrollView()
+                fullScreenVC.centerScrollView()
             }, completion: { (finished: Bool) in
                 transitionContext.completeTransition(true)
             })

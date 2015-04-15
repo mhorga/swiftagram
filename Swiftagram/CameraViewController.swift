@@ -90,7 +90,7 @@ class CameraViewController: UIViewController, UIAlertViewDelegate, CameraToolbar
     
     func createCancelButton() {
         let cancelImage = UIImage(named: "x")
-        let cancelButton = UIBarButtonItem(image: cancelImage, style: UIBarButtonItemStyle.Done, target: self, action: "cancelPressed")
+        let cancelButton = UIBarButtonItem(image: cancelImage, style: UIBarButtonItemStyle.Done, target: self, action: "cancelPressed:")
         self.navigationItem.leftBarButtonItem = cancelButton
     }
     

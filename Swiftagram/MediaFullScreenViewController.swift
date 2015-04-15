@@ -36,12 +36,12 @@ class MediaFullScreenViewController: UIViewController, UIScrollViewDelegate {
         self.imageView!.image = self.media!.image
         self.scrollView!.addSubview(self.imageView!)
         self.scrollView!.contentSize = self.media!.image!.size
-        self.tap = UITapGestureRecognizer(target: self, action: "tapFired")
-        self.doubleTap = UITapGestureRecognizer(target: self, action: "doubleTapFired")
+        self.tap = UITapGestureRecognizer(target: self, action: "tapFired:")
+        self.doubleTap = UITapGestureRecognizer(target: self, action: "doubleTapFired:")
         self.doubleTap!.numberOfTapsRequired = 2
         self.tap!.requireGestureRecognizerToFail(self.doubleTap!)
         if isPhone() == false {
-            self.tapBehind = UITapGestureRecognizer(target: self, action: "tapBehindFired")
+            self.tapBehind = UITapGestureRecognizer(target: self, action: "tapBehindFired:")
             self.tapBehind!.cancelsTouchesInView = false
         }
         self.scrollView!.addGestureRecognizer(self.tap!)

@@ -42,8 +42,8 @@ class PostToInstagramViewController: UIViewController, UICollectionViewDataSourc
         self.sendButton!.backgroundColor = UIColor(red: 0.345, green: 0.318, blue: 0.424, alpha:1) /*#58516c*/
         self.sendButton!.layer.cornerRadius = 5
         self.sendButton!.setAttributedTitle(sendAttributedString(), forState: .Normal)
-        self.sendButton?.addTarget(self, action: "sendButtonPressed", forControlEvents: .TouchUpInside)
-        self.sendBarButton = UIBarButtonItem(title: NSLocalizedString("Send", comment: "Send button"), style: .Done, target: self, action: "sendButtonPressed")
+        self.sendButton?.addTarget(self, action: "sendButtonPressed:", forControlEvents: .TouchUpInside)
+        self.sendBarButton = UIBarButtonItem(title: NSLocalizedString("Send", comment: "Send button"), style: .Done, target: self, action: "sendButtonPressed:")
         addFiltersToQueue()
     }
     

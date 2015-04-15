@@ -23,6 +23,14 @@
 		29B040271AB39EAD002B2830 /* MediaTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B040261AB39EAD002B2830 /* MediaTableViewCell.swift */; };
 		29B040291AB3B718002B2830 /* ImagesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B040281AB3B718002B2830 /* ImagesTableViewController.swift */; };
 		29B0402B1AB472D9002B2830 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29B0402A1AB472D9002B2830 /* LoginViewController.swift */; };
+		29DDC9221ADF20240091FD0C /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDC9211ADF20240091FD0C /* InterfaceController.swift */; };
+		29DDC9241ADF20240091FD0C /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDC9231ADF20240091FD0C /* NotificationController.swift */; };
+		29DDC9261ADF20240091FD0C /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29DDC9251ADF20240091FD0C /* GlanceController.swift */; };
+		29DDC9281ADF20240091FD0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DDC9271ADF20240091FD0C /* Images.xcassets */; };
+		29DDC92C1ADF20240091FD0C /* Swiftagram WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 29DDC92B1ADF20240091FD0C /* Swiftagram WatchKit App.app */; };
+		29DDC9341ADF20240091FD0C /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29DDC9321ADF20240091FD0C /* Interface.storyboard */; };
+		29DDC9361ADF20240091FD0C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 29DDC9351ADF20240091FD0C /* Images.xcassets */; };
+		29DDC9391ADF20240091FD0C /* Swiftagram WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 29DDC91C1ADF20240091FD0C /* Swiftagram WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		29E582AD1AB382960072173E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E582AC1AB382960072173E /* AppDelegate.swift */; };
 		29E582AF1AB382960072173E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29E582AE1AB382960072173E /* ViewController.swift */; };
 		29E582B21AB382960072173E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 29E582B01AB382960072173E /* Main.storyboard */; };
@@ -36,6 +44,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		29DDC92D1ADF20240091FD0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29E5829F1AB382960072173E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29DDC92A1ADF20240091FD0C;
+			remoteInfo = "Swiftagram WatchKit App";
+		};
+		29DDC9371ADF20240091FD0C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29E5829F1AB382960072173E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 29DDC91B1ADF20240091FD0C;
+			remoteInfo = "Swiftagram WatchKit Extension";
+		};
 		29E582BD1AB382960072173E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29E5829F1AB382960072173E /* Project object */;
@@ -53,6 +75,17 @@
 			dstSubfolderSpec = 10;
 			files = (
 			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29DDC9401ADF20240091FD0C /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				29DDC9391ADF20240091FD0C /* Swiftagram WatchKit Extension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -74,6 +107,17 @@
 		29B040261AB39EAD002B2830 /* MediaTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaTableViewCell.swift; sourceTree = "<group>"; };
 		29B040281AB3B718002B2830 /* ImagesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagesTableViewController.swift; sourceTree = "<group>"; };
 		29B0402A1AB472D9002B2830 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		29DDC91C1ADF20240091FD0C /* Swiftagram WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Swiftagram WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29DDC91F1ADF20240091FD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29DDC9201ADF20240091FD0C /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
+		29DDC9211ADF20240091FD0C /* InterfaceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceController.swift; sourceTree = "<group>"; };
+		29DDC9231ADF20240091FD0C /* NotificationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationController.swift; sourceTree = "<group>"; };
+		29DDC9251ADF20240091FD0C /* GlanceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		29DDC9271ADF20240091FD0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		29DDC92B1ADF20240091FD0C /* Swiftagram WatchKit App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Swiftagram WatchKit App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		29DDC9311ADF20240091FD0C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		29DDC9331ADF20240091FD0C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
+		29DDC9351ADF20240091FD0C /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		29E582A71AB382960072173E /* Swiftagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Swiftagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		29E582AB1AB382960072173E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		29E582AC1AB382960072173E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +138,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		29DDC9191ADF20240091FD0C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29E582A41AB382960072173E /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -122,11 +173,52 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		29DDC91D1ADF20240091FD0C /* Swiftagram WatchKit Extension */ = {
+			isa = PBXGroup;
+			children = (
+				29DDC9211ADF20240091FD0C /* InterfaceController.swift */,
+				29DDC9231ADF20240091FD0C /* NotificationController.swift */,
+				29DDC9251ADF20240091FD0C /* GlanceController.swift */,
+				29DDC9271ADF20240091FD0C /* Images.xcassets */,
+				29DDC91E1ADF20240091FD0C /* Supporting Files */,
+			);
+			path = "Swiftagram WatchKit Extension";
+			sourceTree = "<group>";
+		};
+		29DDC91E1ADF20240091FD0C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29DDC91F1ADF20240091FD0C /* Info.plist */,
+				29DDC9201ADF20240091FD0C /* PushNotificationPayload.apns */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		29DDC92F1ADF20240091FD0C /* Swiftagram WatchKit App */ = {
+			isa = PBXGroup;
+			children = (
+				29DDC9321ADF20240091FD0C /* Interface.storyboard */,
+				29DDC9351ADF20240091FD0C /* Images.xcassets */,
+				29DDC9301ADF20240091FD0C /* Supporting Files */,
+			);
+			path = "Swiftagram WatchKit App";
+			sourceTree = "<group>";
+		};
+		29DDC9301ADF20240091FD0C /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				29DDC9311ADF20240091FD0C /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		29E5829E1AB382960072173E = {
 			isa = PBXGroup;
 			children = (
 				29E582A91AB382960072173E /* Swiftagram */,
 				29E582BF1AB382960072173E /* SwiftagramTests */,
+				29DDC91D1ADF20240091FD0C /* Swiftagram WatchKit Extension */,
+				29DDC92F1ADF20240091FD0C /* Swiftagram WatchKit App */,
 				29E582A81AB382960072173E /* Products */,
 				31C4355FBC35C5BE712E5976 /* Pods */,
 				64A47FF6ECDF77506CA59C96 /* Frameworks */,
@@ -138,6 +230,8 @@
 			children = (
 				29E582A71AB382960072173E /* Swiftagram.app */,
 				29E582BC1AB382960072173E /* SwiftagramTests.xctest */,
+				29DDC91C1ADF20240091FD0C /* Swiftagram WatchKit Extension.appex */,
+				29DDC92B1ADF20240091FD0C /* Swiftagram WatchKit App.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -218,6 +312,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		29DDC91B1ADF20240091FD0C /* Swiftagram WatchKit Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29DDC93F1ADF20240091FD0C /* Build configuration list for PBXNativeTarget "Swiftagram WatchKit Extension" */;
+			buildPhases = (
+				29DDC9181ADF20240091FD0C /* Sources */,
+				29DDC9191ADF20240091FD0C /* Frameworks */,
+				29DDC91A1ADF20240091FD0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				29DDC92E1ADF20240091FD0C /* PBXTargetDependency */,
+			);
+			name = "Swiftagram WatchKit Extension";
+			productName = "Swiftagram WatchKit Extension";
+			productReference = 29DDC91C1ADF20240091FD0C /* Swiftagram WatchKit Extension.appex */;
+			productType = "com.apple.product-type.watchkit-extension";
+		};
+		29DDC92A1ADF20240091FD0C /* Swiftagram WatchKit App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 29DDC93E1ADF20240091FD0C /* Build configuration list for PBXNativeTarget "Swiftagram WatchKit App" */;
+			buildPhases = (
+				29DDC9291ADF20240091FD0C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Swiftagram WatchKit App";
+			productName = "Swiftagram WatchKit App";
+			productReference = 29DDC92B1ADF20240091FD0C /* Swiftagram WatchKit App.app */;
+			productType = "com.apple.product-type.application.watchapp";
+		};
 		29E582A61AB382960072173E /* Swiftagram */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 29E582C61AB382960072173E /* Build configuration list for PBXNativeTarget "Swiftagram" */;
@@ -228,10 +355,12 @@
 				29E582A51AB382960072173E /* Resources */,
 				298976E61ACBEBCF0048FB9B /* CopyFiles */,
 				58ECCBBB21A3553D15DD1EF9 /* Copy Pods Resources */,
+				29DDC9401ADF20240091FD0C /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				29DDC9381ADF20240091FD0C /* PBXTargetDependency */,
 			);
 			name = Swiftagram;
 			productName = Swiftagram;
@@ -265,6 +394,12 @@
 				LastUpgradeCheck = 0620;
 				ORGANIZATIONNAME = "Marius Horga";
 				TargetAttributes = {
+					29DDC91B1ADF20240091FD0C = {
+						CreatedOnToolsVersion = 6.3;
+					};
+					29DDC92A1ADF20240091FD0C = {
+						CreatedOnToolsVersion = 6.3;
+					};
 					29E582A61AB382960072173E = {
 						CreatedOnToolsVersion = 6.2;
 					};
@@ -289,11 +424,31 @@
 			targets = (
 				29E582A61AB382960072173E /* Swiftagram */,
 				29E582BB1AB382960072173E /* SwiftagramTests */,
+				29DDC91B1ADF20240091FD0C /* Swiftagram WatchKit Extension */,
+				29DDC92A1ADF20240091FD0C /* Swiftagram WatchKit App */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		29DDC91A1ADF20240091FD0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29DDC9281ADF20240091FD0C /* Images.xcassets in Resources */,
+				29DDC92C1ADF20240091FD0C /* Swiftagram WatchKit App.app in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		29DDC9291ADF20240091FD0C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29DDC9341ADF20240091FD0C /* Interface.storyboard in Resources */,
+				29DDC9361ADF20240091FD0C /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29E582A51AB382960072173E /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -347,6 +502,16 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		29DDC9181ADF20240091FD0C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				29DDC9241ADF20240091FD0C /* NotificationController.swift in Sources */,
+				29DDC9221ADF20240091FD0C /* InterfaceController.swift in Sources */,
+				29DDC9261ADF20240091FD0C /* GlanceController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		29E582A31AB382960072173E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -386,6 +551,16 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		29DDC92E1ADF20240091FD0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29DDC92A1ADF20240091FD0C /* Swiftagram WatchKit App */;
+			targetProxy = 29DDC92D1ADF20240091FD0C /* PBXContainerItemProxy */;
+		};
+		29DDC9381ADF20240091FD0C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 29DDC91B1ADF20240091FD0C /* Swiftagram WatchKit Extension */;
+			targetProxy = 29DDC9371ADF20240091FD0C /* PBXContainerItemProxy */;
+		};
 		29E582BE1AB382960072173E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 29E582A61AB382960072173E /* Swiftagram */;
@@ -394,6 +569,14 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		29DDC9321ADF20240091FD0C /* Interface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				29DDC9331ADF20240091FD0C /* Base */,
+			);
+			name = Interface.storyboard;
+			sourceTree = "<group>";
+		};
 		29E582B01AB382960072173E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -413,6 +596,72 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		29DDC93A1ADF20240091FD0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Swiftagram WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		29DDC93B1ADF20240091FD0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Swiftagram WatchKit Extension/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_NAME = "${TARGET_NAME}";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		29DDC93C1ADF20240091FD0C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IBSC_MODULE = Swiftagram_WatchKit_Extension;
+				INFOPLIST_FILE = "Swiftagram WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Debug;
+		};
+		29DDC93D1ADF20240091FD0C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_NO_COMMON_BLOCKS = YES;
+				IBSC_MODULE = Swiftagram_WatchKit_Extension;
+				INFOPLIST_FILE = "Swiftagram WatchKit App/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+			};
+			name = Release;
+		};
 		29E582C41AB382960072173E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -499,7 +748,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Swiftagram/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swiftagram/Swiftagram-Bridging-Header.h";
@@ -514,7 +763,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Swiftagram/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Swiftagram/Swiftagram-Bridging-Header.h";
@@ -558,6 +807,22 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		29DDC93E1ADF20240091FD0C /* Build configuration list for PBXNativeTarget "Swiftagram WatchKit App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29DDC93C1ADF20240091FD0C /* Debug */,
+				29DDC93D1ADF20240091FD0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		29DDC93F1ADF20240091FD0C /* Build configuration list for PBXNativeTarget "Swiftagram WatchKit Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				29DDC93A1ADF20240091FD0C /* Debug */,
+				29DDC93B1ADF20240091FD0C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		29E582A21AB382960072173E /* Build configuration list for PBXProject "Swiftagram" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

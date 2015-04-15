@@ -28,7 +28,7 @@ class ComposeCommentView: UIView, UITextViewDelegate {
         self.textView = UITextView()
         self.button = UIButton.buttonWithType(UIButtonType.Custom) as? UIButton
         super.init(frame: frame)
-        self.button!.addTarget(self, action: "commentButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+        self.button!.addTarget(self, action: "commentButtonPressed:", forControlEvents: UIControlEvents.TouchUpInside)
         self.textView!.addSubview(self.button!)
         self.textView!.delegate = self
         self.button!.setAttributedTitle(self.commentAttributedString(), forState: UIControlState.Normal)

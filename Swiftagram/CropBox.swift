@@ -16,14 +16,14 @@ class CropBox: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.userInteractionEnabled = false
-        let lines = self.horizontalLines!.arrayByAddingObjectsFromArray(self.verticalLines! as [AnyObject]) as NSArray
-        for lineView in lines {
-            self.addSubview(lineView as! UIView)
-        }
+//        let lines = self.horizontalLines!.arrayByAddingObjectsFromArray(self.verticalLines! as [AnyObject]) as NSArray
+//        for lineView in lines {
+//            self.addSubview(lineView as! UIView)
+//        }
     }
 
     required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+        super.init(coder: aDecoder)
     }
     
     func horizontallines() -> NSArray {
@@ -54,15 +54,15 @@ class CropBox: UIView {
         super.layoutSubviews()
         let width = CGRectGetWidth(self.frame)
         let thirdOfWidth = width / 3
-        for i in 0..<4 {
-            let horizontalLine = self.horizontalLines![i] as! UIView
-            let verticalLine = self.verticalLines![i] as! UIView
-            horizontalLine.frame = CGRectMake(0, (CGFloat(i) * thirdOfWidth), width, 0.5)
-            var verticalFrame = CGRectMake(CGFloat(i) * thirdOfWidth, 0, 0.5, width)
-            if i == 3 {
-                verticalFrame.origin.x -= 0.5
-            }
-            verticalLine.frame = verticalFrame
-        }
+//        for i in 0..<4 {
+//            let horizontalLine = self.horizontalLines![i] as! UIView
+//            let verticalLine = self.verticalLines![i] as! UIView
+//            horizontalLine.frame = CGRectMake(0, (CGFloat(i) * thirdOfWidth), width, 0.5)
+//            var verticalFrame = CGRectMake(CGFloat(i) * thirdOfWidth, 0, 0.5, width)
+//            if i == 3 {
+//                verticalFrame.origin.x -= 0.5
+//            }
+//            verticalLine.frame = verticalFrame
+//        }
     }
 }
